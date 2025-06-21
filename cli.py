@@ -64,7 +64,8 @@ class SpotifyControllerCLI:
                 client_id=spotify_config['client_id'],
                 client_secret=spotify_config['client_secret'],
                 redirect_uri=spotify_config.get('redirect_uri', 'http://localhost:8888/callback'),
-                scope="user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative"
+                scope="user-read-playback-state user-modify-playback-state playlist-read-private playlist-read-collaborative",
+                cache_path=".spotify_cache"
             ))
             
             # Test authentication

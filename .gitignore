@@ -10,6 +10,7 @@ config.yaml
 *.pyd
 __pycache__/
 
+.spotify_cache
 # Logs
 logs/
 *.log

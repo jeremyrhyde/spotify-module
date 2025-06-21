@@ -109,7 +109,7 @@ class PlatformDetector:
                 return 'spotifyd-macos-x86_64'
         elif self.is_linux():
             if self.is_raspberry_pi():
-                return 'spotifyd-linux-armhf'
+                return 'spotifyd-linux-aarch64' # was armf but not working
             elif 'aarch64' in self._machine or 'arm64' in self._machine:
                 return 'spotifyd-linux-aarch64'
             else:
