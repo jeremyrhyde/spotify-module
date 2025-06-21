@@ -1,14 +1,17 @@
 #!/bin/bash
 
 # Check if spotifyd is running
-if ! pgrep -x "spotifyd" > /dev/null
+if pgrep -x "spotifyd" > /dev/null
 then
-    echo "spotifyd is not running. Starting spotifyd..."
-    # Start spotifyd
-    spotifyd --no-daemon --device-name "RaspberryPi" &
-else
-    echo "spotifyd is already running."
+    echo "Killing existing spotifyd process..."
+    pkill -x "spotifyd"
+    sleep 2  # Give it a moment to clean up
 fi
+
+eval "$(dbus-launch --sh-syntax)"
+
+echo "Starting spotifyd..."
+spotifyd --no-daemon --device-name "RaspberryPi" &
 
 # Wait a few seconds to ensure spotifyd has started
 sleep 5

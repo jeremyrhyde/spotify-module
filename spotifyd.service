@@ -1,0 +1,15 @@
+[Unit]
+Description=Spotifyd Daemon
+After=network.target sound.target
+
+[Service]
+User=ubuntu
+ExecStart=/usr/local/bin/spotifyd --no-daemon --device-name "RaspberryPi"
+Restart=on-failure
+RestartSec=10s
+ExecStartPre=/bin/sleep 15
+Environment=DISPLAY=:0
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
+[Install]
+WantedBy=default.target

@@ -27,6 +27,7 @@ def main():
     
     print("Getting track URIs...")
     uris = sp.get_track_uris(playlist_id)
+    sp.list_devices()
     sp.play_on_device(uris)
     
     try:
