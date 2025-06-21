@@ -1,2 +1,4 @@
 spotipy
 pyyaml
+requests
+psutil
