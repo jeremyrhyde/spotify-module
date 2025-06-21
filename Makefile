@@ -3,23 +3,25 @@
 
 .PHONY: setup clean run cli test lint format check setup
 
-# Python and virtual environment settings
 PYTHON := python3
+PIP := pip3
+
+# Python and virtual environment settings
 VENV := venv
 VENV_BIN := $(VENV)/bin
-PIP := $(VENV_BIN)/pip
-PYTHON_VENV := $(VENV_BIN)/python
+VENV_PYTHON := $(VENV_BIN)/python
+VENV_PIP := $(VENV_BIN)/pip
 
 # Create virtual environment
 setup:
 	$(PYTHON) -m venv $(VENV)
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	$(VENV_PIP) install --upgrade pip
+	$(VENV_PIP) install -r requirements.txt
 
 # Run interactive CLI
 run:
 	@echo "Starting Spotify Controller (Interactive Mode)..."
-	$(PYTHON_VENV) cli.py
+	$(VENV_PYTHON) cli.py
 
 # Alias for run
 cli: run
