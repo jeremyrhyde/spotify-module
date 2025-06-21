@@ -1,39 +1,25 @@
-# main.py
+"""
+Main entry point for Spotify Controller
+Uses the SpotifyControllerCLI class for interactive control
+"""
 
-import yaml
-import time
-from spotify_player.spotify import Spotify
-
-playlist_id = "2bpNUD5gCPCoYd0Spo3GGB"
-volume = 70
-
-def load_config(path="config.yaml"):
-    with open(path, "r") as f:
-        return yaml.safe_load(f)
+import sys
+from cli import SpotifyControllerCLI
 
 def main():
-    config = load_config()
-    spotify_cfg = config["spotify"]
-
-    print("Starting connection to spotify...")
-    sp = Spotify(
-        client_id=spotify_cfg["client_id"],
-        client_secret=spotify_cfg["client_secret"],
-        redirect_uri=spotify_cfg["redirect_uri"],
-        device_id=spotify_cfg["device_id"]
-    )
+    """Main function using SpotifyControllerCLI"""
+    cli = SpotifyControllerCLI()
     
-    sp.set_volume(50)
-    
-    print("Getting track URIs...")
-    uris = sp.get_track_uris(playlist_id)
-    sp.list_devices()
-    sp.play_on_device(uris)
+    config_file = "config/config.yaml"
+    if len(sys.argv) > 1:
+        config_file = sys.argv[1]
     
     try:
-        sp.gradually_increase_volume(increment=1, delay=10)
-    except KeyboardInterrupt:
-        sp.stop_playback_on_exit()  # Handle ctrl+C gracefully
-    
+        cli.run(config_file)
+        return 0
+    except Exception as e:
+        print(f"Fatal error: {e}")
+        return 1
+
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

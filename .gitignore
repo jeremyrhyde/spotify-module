@@ -1,3 +1,40 @@
+# Configuration files
 *config.yaml
+config.yaml
+
+# Cache and temporary files
 .cache
 *__pycache__*
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+.spotify_cache
+# Logs
+logs/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Spotify cache
+.spotify_cache/
+
+# Local binaries
+.local/
+
+# Linting configs (if created)
+.pylintrc
